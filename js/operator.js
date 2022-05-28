@@ -161,7 +161,7 @@ for (let i = 3; i > 0; i--) {
     console.log(`for: ${i}`);
 }
 
-for (let i = 3; i > 0; i = i - 2) {
+for (let i = 5; i > 0; i = i - 2) {
     console.log(`inline variable for: ${i}`);
 }
 
@@ -189,4 +189,12 @@ for (let i = 0; i < 11; i++) {
         break;
     }
     console.log(`q2. ${i}`);
+}
+
+console.log('-----');
+let ten = 10;
+while (ten <= 20) {
+    console.log(`ten: ${ten}`);
+    ten++;
+    break;
 }
