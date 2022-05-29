@@ -182,9 +182,20 @@ simplePrint2();
 /*
 * IIFE : Immediately Invoked Function Expression
 */
+// 함수를 선언함과 동시에 함수를 ()로 묶어주고 뒤에 함수처럼 ()를 붙여주면 선언과 동시에 바로 실행한다.
 (function hello() {
     console.log('IIFE');
 })();
+
+// function calculate(command, a, b)
+// command: add, substract, divide, multiply, remainder
+
+
+function calculate(command, a, b) {
+    console.log(command, a, b);
+}
+
+
 
 
 
