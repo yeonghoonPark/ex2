@@ -196,5 +196,4 @@ let ten = 10;
 while (ten <= 20) {
     console.log(`ten: ${ten}`);
     ten++;
-    break;
 }
