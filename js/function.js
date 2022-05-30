@@ -192,8 +192,42 @@ simplePrint2();
 
 
 function calculate(command, a, b) {
-    console.log(command, a, b);
+    // switch (command) {
+    //     case 'add':
+    //         return a + b;
+    //         break;
+    //     case 'substranct':
+    //         return a - b;
+    //         break;
+    //     case 'divide':
+    //         return a / b;
+    //         break;
+    //     case 'multiply':
+    //         return a * b;
+    //         break;
+    //     case 'remainder':
+    //         return a % b;
+    //     default:
+    //         throw Error('unknown command');
+    // }
+
+    if (command === 'add') {
+        return a + b;
+    } else if (command === 'substranct') {
+        return a - b;
+    } else if (command === 'divide') {
+        return a / b;
+    } else if (command === 'multiply') {
+        return a * b;
+    } else if (command === 'remainder') {
+        return a % b;
+    } else {
+        throw Error('unknown command');
+    }
+
 }
+
+console.log(calculate('why', 1, 5));
 
 
 
