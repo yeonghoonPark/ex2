@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variable</title>
+    <!-- 
+        1. head안에 script:src가 들어 갈 경우 
+        - parsing HTML -> script:src 발견 후 blocked(fetchingJS, executingJS) -> parsing HTML -> page is ready 
+        * 단점: js파일이 매우 크거나, 인터넷의 속도가 느리다면 client가 사이트를 보는데까지 시간이 많이 소요되고,
+        HTML문서에서 js에서 필요한 class나 id선언이 이루어지지 않았기 때문에 문제가 생긴다.
+        
+        2. body안에 body가 끝나기전에 script:src가 들어 갈 경우
+        - parsing HTMl -> page is ready -> script:src 발견 후 fetchingJS, executingJS
+        * 장점 : client가 HTML문서를 빠르게 볼 수 있다.
+        * 단점 : 만약 나의 웹이 js에 의존적이라면 사용자가 정상적인 기능을 하는 웹을 확인하기 전까지 많은 시간이 소요된다.
+        
+        3. head + async(에이싱크), async는 boolean속성이기 때문에 선언만 하더라도 true값으로 적용된다.
+        - parsing HTML -> script:src 발견 후 병렬로 parsing HTML, fetchingJS 그리고 fetching이 끝나면 -> blocked(executingJS) 
+        -> parsing HTML -> page is ready
+        * 장점 : body끝에 사용하는 것 보다 fetching이 HTML을 읽으면서 병렬적으로 일어나기 때문에 fetching시간이 줄어든다.
+        * 단점 : js가 parsing HTML끝나기 전에 실행되기 때문에(executingJS) HTML문서에서 정의되어지지 않은 js에서 필요한 엘리먼트
+        나 클래스명이 준비되지 않을 수 있다. 또한 async는 여러개의 js를 fetching할 때 병렬적으로 순서없이
+        먼저 fetching되는 것을 실행하기 때문에 나의 웹이 순서에 의존적이라면 문제가 생긴다.
+    
+        4. head + defer
+        - parsing HTML -> script:src 발견 후 병렬로 parsing HTML, fetchingJS -> parsing HTML end
+        -> page is ready -> executingJS
+        * 장점 : HTML문서와 fetching을 병렬적으로 진행하기에 fetching시간이 줄어들고 parsing HTML이 
+        끝나면 fetching한 js를 실행(executingJS)하기 때문에 좋다. 또한 async와는 다르게 parsing HTML을
+        하면서 fetchingJS를 하고 page is ready가 되면 순차적으로 js파일을 불러오기 때문에 순서에 의존적
+        이더라도 문제없다.
+    -->
+
+    <script defer src="./jS/variable.js"></script>
+</head>
+
+<body>
+
+
+
+</body>
+
+</html>

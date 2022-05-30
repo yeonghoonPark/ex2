@@ -1,7 +1,16 @@
 // 1. use strict
 // added in ES5
 // use this for Vanilla javaScript
+// use strict를 사용하는 이유, js는 매우 유연한 언어다, 타입을 초월하거나 변수를 선언하지 않고 값을 할당거나 등등..
+// 유연함 == 위험, 이는 개발중 많은 실수를 할 수 있다.
+// 예를들면 선언되지 않는 변수의 값을 할당하거나 기존에 존재하던 프로토타입을 변경하는 경우를 막아준다
+// use strict를 사용하면 조금 더 상식적으로 코딩할 수 있고, js엔진이 조금 더 효율적으로 js를 읽을 수 있다(성능개선).
 'use strict';
+
+// use strict가 없다면 가능
+// let z;
+// z = 0;
+// console.log(z);
 
 // 2. variable, rw(read/write)
 // let (added in ES6)
