@@ -29,8 +29,8 @@ console.log(obj2);
 // if it is not an object, two parameters are required
 const name = 'gildong';
 const age = 4;
-print(name, age);
-function print(name, age) {
+print1(name, age);
+function print1(name, age) {
     console.log(name, age);
 }
 
