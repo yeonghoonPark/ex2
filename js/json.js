@@ -34,7 +34,6 @@ json = JSON.stringify(rabbit, (key, value) => {
 });
 console.log(json);
 
-
 // 2. JSON to Object
 // parse(json)
 const obj = JSON.parse(json, (key, value) => {
