@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            display: inline-block;
+            font-size: 2em;
+            background: mediumaquamarine;
+            padding: 0.5em 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Relative length units 🤩</h1>
+    <ul>
+        <li>
+            em: (relative to parent element) 선택된 폰트패밀리와는 상관없이, 즉 선택된 폰트와 상관없이 고정된 폰트사이즈를 갖는다.
+            em은 부모의 폰트사이즈의 상대적으로 크기가 계산된다.
+        </li>
+        <br>
+        <li>
+            rem: (relative to root element) 부모에 따라 사이즈가 결정되는 것이 아닌, 즉 root에 따라 사이즈가 결정된다.
+        </li>
+        <br>
+        <li>
+            vw: viewport width
+        </li>
+        <br>
+        <li>
+            vh: viewport height
+        </li>
+        <br>
+        <li>
+            %: 부모요소에 상대적으로 계산된다.
+        </li>
+    </ul>
+
+    <ul>
+        <li>
+            parent가 기준: %, em
+        </li>
+        <br>
+        <li>
+            browser가 기준: vw, vh, rem
+        </li>
+        <br>
+        <li>
+            요소의 width와 height가 기준: %, vw, wh
+        </li>
+        <br>
+        <li>
+            요소의 font-size가 기준: em, rem
+        </li>
+    </ul>
+
+
+</body>
+</html>
