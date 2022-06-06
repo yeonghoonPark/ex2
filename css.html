@@ -6,15 +6,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cascading style sheet</title>
     <style>
+        /* selector{
+            property: value;
+        } */
 
+        *{
+            color: green;
+        }
+
+        li{
+            color: blue;
+        }
+
+        #special{
+            color: pink;
+        }
+
+        .red{
+            background: yellow;
+            width: 100px;
+            height: 100px;
+        }
+
+        button:hover{
+            color: red;
+            background: beige;
+        }
+
+        a[href="naver.com"]{
+            color: purple;
+        }
     </style>
 </head>
 <body>
     <h1>CSS: Cascading style sheet</h1>
     <ul>
-        <li>1순위,Author style</li>
-        <li>2순위,User Style</li>
-        <li>3순위,Browser</li>
-    </ul>
+        <li>1순위, Author style</li>
+        <li>2순위, User Style</li>
+        <li>3순위, Browser</li>
+    </ul> 
+    
+    <ol>
+        <li id="special">First</li>
+        <li>Second</li>
+    </ol>
+
+    <button>Button 1</button>
+    <button>Button 2</button>
+
+    <div class="red"></div>
+    <div class="blue"></div>
+
+    <a href="naver.com">Naver</a>
+    <a href="googlenaver.com">Google</a>
+    <a>Empty</a>
 </body>
 </html>
