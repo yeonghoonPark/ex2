@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex</title>
+    <style>
+        .container{
+            height: 100vh;
+            background: beige;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between; /* main axis */
+            align-items: baseline; /* cross axis */
+            align-content: space-between;
+        }
+        .item{
+            width: 40px;
+            height: 40px;
+            border: 1px solid #fff;
+            color: #fff;
+        }
+        .item01{
+            background: red;
+            padding: 20px;
+        }
+        .item02{
+            background: orangered;
+        }
+        .item03{
+            background: orange;
+        }
+        .item04{
+            background: yellow;
+        }
+        .item05{
+            background: yellowgreen;
+        }
+        .item06{
+            background: green;
+        }
+        .item07{
+            background: lightblue;
+        }
+        .item08{
+            background: blue;
+        }
+        .item09{
+            background: darkblue;
+        }
+        .item10{
+            background: purple;
+        }
+
+        .container1{
+            padding-top: 100px;
+            background: #000;
+            height: 100vh;
+            display: flex;
+        }
+        .item1{
+            background: red;
+            order: 2;
+            flex-grow: 1; /* 기본값은 0, 커질 때 어떻비율로 커지냐*/
+            flex-shrink: 2; /* 기본값은 0, 작아질 때 어떻비율로 작아지냐*/
+            flex-basis: 60%; /* flex: ; */
+            align-self: flex-end;
+        }
+        .item2{
+            background: green;
+            order: 1;
+            flex-grow: 2;
+            flex-shrink: 1;
+            flex-basis: 30%;
+        }
+        .item3{
+            background: blue;
+            /* order의 기본값은 0이기 때문에 지정하지 않았으므로 가장 처음에 온다. */
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 10%;
+        }
+    </style>
+</head>
+<body>
+    float: center, left, right
+    float의 목적, text와 image의 배치를 위한 목적
+
+    flex에는 주축(main axis)와 반대축(cross axis)가 있다.
+
+    <h1>flex의 container property</h1>
+    <ul>
+        <li>display</li>
+        <li>flex-direction</li>
+        <li>flex-wrap</li>
+        <li>flex-flow</li>
+        <li>justify-content</li>
+        <li>align-items</li>
+        <li>align-content</li>
+    </ul>
+
+    <h1>flex의 item property</h1>
+    <ul>
+        <li>order</li>
+        <li>flex-grow</li>
+        <li>flex-shrink</li>
+        <li>flex</li>
+        <li>align-self</li>
+    </ul>
+
+    <div class="container">
+        <div class="item item01">1</div>
+        <div class="item item02">2</div>
+        <div class="item item03">3</div>
+        <div class="item item04">4</div>
+        <div class="item item05">5</div>
+        <div class="item item06">6</div>
+        <div class="item item07">7</div>
+        <div class="item item08">8</div>
+        <div class="item item09">9</div>
+        <div class="item item10">0</div>
+        <div class="item item01">1</div>
+        <div class="item item02">2</div>
+        <div class="item item03">3</div>
+        <div class="item item04">4</div>
+        <div class="item item05">5</div>
+        <div class="item item06">6</div>
+        <div class="item item07">7</div>
+        <div class="item item08">8</div>
+        <div class="item item09">9</div>
+        <div class="item item10">0</div>
+        <div class="item item01">1</div>
+        <div class="item item02">2</div>
+        <div class="item item03">3</div>
+        <div class="item item04">4</div>
+        <div class="item item05">5</div>
+        <div class="item item06">6</div>
+        <div class="item item07">7</div>
+        <div class="item item08">8</div>
+        <div class="item item09">9</div>
+        <div class="item item10">0</div>
+    </div>
+
+    <div class="container1">
+        <div class="item item1">1</div>
+        <div class="item item2">2</div>
+        <div class="item item3">3</div>
+    </div>
+</body>
+</html>
