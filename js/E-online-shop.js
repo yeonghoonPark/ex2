@@ -49,5 +49,3 @@ loadItems()
         setEventListeners(items);
      })
 .catch(console.log)
-
-.console.log('테스트를 위한 콘솔');
