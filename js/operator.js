@@ -8,7 +8,7 @@ console.log(`string literals: 1 + 2 = ${1 + 2}`);
 // single quotation 을 사용할 때는 \를 사용하면 그대로 표기 된다,
 // 줄바꿈을 할 때는 \n 을 사용하면 줄이 바뀐다.
 // \t 는 tap의 기능
-console.log('길동\'s \n\tbook');
+console.log("길동's \n\tbook");
 
 // 2. numeric operators(숫자연산자, 산술연산자)
 console.log(1 + 1); // add
@@ -32,10 +32,10 @@ console.log(`postIncrement: ${postIncrement}, counter: ${counter}`);
 // 4. assignment operators
 let x = 3;
 let y = 6;
-console.log(x += y); // x = x + y; 
-console.log(x -= y); // x = x - y; 
-console.log(x *= y); // x = x * y; 
-console.log(x /= y); // x = x / y;
+console.log((x += y)); // x = x + y;
+console.log((x -= y)); // x = x - y;
+console.log((x *= y)); // x = x * y;
+console.log((x /= y)); // x = x / y;
 
 // 5. comparison operators (비교연산자)
 console.log(10 < 6); // less than
@@ -60,11 +60,11 @@ console.log(`or: ${value1 || value2 || check()}`);
 console.log(`and: ${value1 && value2 && check()}`);
 
 function check() {
-    for (let i = 0; i < 5; i++) {
-        // wasting time
-        console.log('😎');
-    }
-    return 'true입니다.';
+  for (let i = 0; i < 5; i++) {
+    // wasting time
+    console.log('😎');
+  }
+  return 'true입니다.';
 }
 
 // !(not)
@@ -83,7 +83,7 @@ console.log(stringFive != numberFive);
 // type과 값 모두 본다.
 console.log(stringFive === numberFive);
 console.log(stringFive !== numberFive);
-console.log(`------`)
+console.log(`------`);
 
 // object equality by reference
 const gildong1 = { name: 'gildong' };
@@ -95,7 +95,7 @@ console.log(gildong1 === gildong3);
 // gildong1과 gildong2는 오브젝트의 값은 같지만 서로 다른 오브젝트이다.
 // gildong1과 gildong3은 같은 오브젝트이다.
 
-console.log(`------`)
+console.log(`------`);
 // equality - puzzler
 console.log(0 == false);
 console.log(0 === false);
@@ -108,11 +108,11 @@ console.log(null === undefined);
 // if, else if, else
 const name = 'gildong';
 if (name === 'gildong') {
-    console.log('Welcome Gildong');
+  console.log('Welcome Gildong');
 } else if (name === 'coder') {
-    console.log('U are amazing coder');
+  console.log('U are amazing coder');
 } else {
-    console.log('who a u?');
+  console.log('who a u?');
 }
 
 // ★ 9. ternary operator: ? (3항연산자)
@@ -127,16 +127,16 @@ console.log(name === 'gildong' ? 'yes' : 'no');
 // use for multiple type checks in TS
 const browser = 'IE';
 switch (browser) {
-    case 'IE':
-        console.log('go away!');
-        break;
-    case 'Chrome':
-    case 'Firefox':
-        console.log('love u!');
-        break;
-    default:
-        console.log('same all!');
-        break;
+  case 'IE':
+    console.log('go away!');
+    break;
+  case 'Chrome':
+  case 'Firefox':
+    console.log('love u!');
+    break;
+  default:
+    console.log('same all!');
+    break;
 }
 
 // ★ 11. loops (반복문)
@@ -144,56 +144,56 @@ switch (browser) {
 // body code is executed
 let i = 3;
 while (i > 0) {
-    console.log(`while: ${i}`);
-    i--;
+  console.log(`while: ${i}`);
+  i--;
 }
 
 // do while loop, body code is executed first,
 // then check the condition.
 // do의 블럭을 실행 한 후에 while의 조건이 맞는지 안맞는지 검사.
 do {
-    console.log(`do while: ${i}`);
-    i--;
-} while (i > 0)
+  console.log(`do while: ${i}`);
+  i--;
+} while (i > 0);
 
 // for loop, for(begin; condition; step)
 for (let i = 3; i > 0; i--) {
-    console.log(`for: ${i}`);
+  console.log(`for: ${i}`);
 }
 
 for (let i = 5; i > 0; i = i - 2) {
-    console.log(`inline variable for: ${i}`);
+  console.log(`inline variable for: ${i}`);
 }
 
 // nested loop (중첩반복), cpu에 좋지가 않다, 되도록 피할 것.
 for (let i = 0; i < 10; i++) {
-    for (let j = 0; j < 10; j++) {
-        console.log(`i: ${i}, j: ${j}`);
-    }
+  for (let j = 0; j < 10; j++) {
+    console.log(`i: ${i}, j: ${j}`);
+  }
 }
 
 // break, continue
 // Q1. iterate from 0 to 10 and print only even numbers
 // (use continue)
 for (let i = 0; i < 11; i++) {
-    if (i % 2 !== 0) {
-        continue;
-    }
-    console.log(`q1. ${i}`);
+  if (i % 2 !== 0) {
+    continue;
+  }
+  console.log(`q1. ${i}`);
 }
 
 // Q2. interate from 0 to 10 and print numbers until reaching 8
 // (use break)
 for (let i = 0; i < 11; i++) {
-    if (i == 9) {
-        break;
-    }
-    console.log(`q2. ${i}`);
+  if (i == 9) {
+    break;
+  }
+  console.log(`q2. ${i}`);
 }
 
 console.log('-----');
 let ten = 10;
 while (ten <= 20) {
-    console.log(`ten: ${ten}`);
-    ten++;
+  console.log(`ten: ${ten}`);
+  ten++;
 }

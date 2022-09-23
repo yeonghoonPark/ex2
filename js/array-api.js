@@ -19,7 +19,6 @@
   const array = [1, 2, 3, 4, 5];
   const result = array.reverse();
   console.log(result);
-
 }
 
 // Q4. make new array without the first two elements
@@ -57,7 +56,6 @@ const students = [
   console.log(result);
 }
 
-
 // Q7. make an array containing only the students' scores
 // result should be: [45, 80, 90, 66, 88]
 {
@@ -70,7 +68,7 @@ const students = [
   const result = students.some((item) => item.score < 50);
   console.log(result);
 
-  const result2 =! students.every((item) => item.score >= 50);
+  const result2 = !students.every((item) => item.score >= 50);
   console.log(result2);
 }
 
@@ -97,7 +95,7 @@ const students = [
 {
   const result = students
     .map((item) => item.score)
-    .sort((a, b)=> b - a)
+    .sort((a, b) => b - a)
     .join();
   console.log(result);
 }

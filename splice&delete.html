@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        max-width: 300px;
+        margin: 5px auto;
+      }
+      .btn-box {
+        text-align: center;
+      }
+      ul {
+        margin: 50px;
+        padding: 0;
+      }
+      li {
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid #000;
+        text-align: center;
+        list-style: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="btn-box btn-box1">
+        <button id="top">Top</button>
+        <button id="up">Up</button>
+        <button id="bottom">Bottom</button>
+        <button id="down">Down</button>
+      </div>
+      <ul id="ul"></ul>
+      <div class="btn-box btn-box2">
+        <button>checkedSelected</button>
+      </div>
+    </div>
+
+    <script>
+      const url = "./data/splice&delete.json";
+
+      const getData = async () => {
+        try {
+          const response = await fetch(url);
+          const json = await response.json();
+          console.log(response);
+          console.log(json.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      getData();
+    </script>
+  </body>
+</html>

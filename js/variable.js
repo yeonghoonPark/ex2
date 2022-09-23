@@ -16,17 +16,17 @@
 // let (added in ES6)
 
 {
-    let name = 'yeonghoon';
-    console.log(name);
-    name = 'hello';
-    console.log(name);
+  let name = 'yeonghoon';
+  console.log(name);
+  name = 'hello';
+  console.log(name);
 }
 
 // var (don't ever use this!)
 // var hoisting (move declaration from bottom to top)
 // has no block scope
 {
-    age = 4;
+  age = 4;
 }
 console.log(age);
 age = 4;
@@ -99,10 +99,9 @@ console.log(gSymbol1 === gSymbol2);
 console.log(`value: ${symbol1.description}, type: ${typeof symbol1}`);
 
 // object, real-life object, data structure
-const person = { name: 'ellie', age: 20 }
+const person = { name: 'ellie', age: 20 };
 person.age = 21;
 console.log(person);
-
 
 // 5. dynamic typing: dynamically typed language
 let text = 'hello';

@@ -21,21 +21,21 @@ console.log(`--Dotted line--`);
 // 3. Looping over an array
 // print all fruits
 // 3-1. for loop
-for (let i = 0; i < fruits.length;i++){
-    console.log(fruits[i]);
+for (let i = 0; i < fruits.length; i++) {
+  console.log(fruits[i]);
 }
 console.log(`--Dotted line--`);
 
 // 3-2. for of
 for (let 값 of fruits) {
-    console.log(값);
+  console.log(값);
 }
 console.log(`--Dotted line--`);
 
 // 3-3. forEach
 fruits.forEach((item, index) => {
-    console.log(item, index);
-})
+  console.log(item, index);
+});
 console.log(`--Dotted line--`);
 
 // 3-4. map
@@ -43,7 +43,7 @@ fruits.map((item) => console.log(item));
 console.log(`--Dotted line--`);
 
 // 4. addtion, deletion, copy
-// push: add an item to the end 
+// push: add an item to the end
 fruits.push('🍉', '🍇');
 console.log(fruits);
 
@@ -96,7 +96,7 @@ console.log(newTestNumber.includes(3));
 console.log(newTestNumber.includes(12));
 
 // lastIndexOf
-// 배열에서 같은 값이 있을 경우 indexOf는 그 같은 값의 첫번째 index를 찾고, 
+// 배열에서 같은 값이 있을 경우 indexOf는 그 같은 값의 첫번째 index를 찾고,
 // lastIndexOf는 같은 값의 마지막 index를 찾는다.
 newTestNumber.push(3);
 console.log(newTestNumber);
@@ -116,5 +116,3 @@ console.log(sliceNewTestNumber);
 // sort
 newTestNumber.sort();
 console.log(newTestNumber);
-
-
