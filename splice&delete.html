@@ -36,24 +36,57 @@
       </div>
       <ul id="ul"></ul>
       <div class="btn-box btn-box2">
-        <button>checkedSelected</button>
+        <button id="selectedBtn">check Selected</button>
       </div>
     </div>
 
     <script>
       const url = "./data/splice&delete.json";
 
-      const getData = async () => {
+      const loadItems = async () => {
         try {
           const response = await fetch(url);
           const json = await response.json();
-          console.log(response);
-          console.log(json.data);
+          return json.items;
         } catch (error) {
           console.error(error);
         }
       };
-      getData();
+
+      const createHTMLString = (item) => {
+        return `<li class='li'>${item.value}</li>`;
+      };
+
+      const displayItems = (items) => {
+        const ul = document.querySelector("#ul");
+        ul.innerHTML = items.map((item) => createHTMLString(item)).join(" ");
+      };
+
+      const setEventListners = () => {
+        const li = document.querySelectorAll(".li");
+        li.forEach((item) => {
+          item.selected = item.selected || "N";
+          console.log(item.selected, "@@셀렉티드");
+        });
+
+        li.forEach((item) => {
+          item.addEventListener("click", () => {
+            console.log(item.selected);
+          });
+        });
+
+        const handleSelectedBtn = document.querySelector("#selectedBtn");
+        handleSelectedBtn.addEventListener("click", () => {
+          li.forEach((item) => console.log(item.selected, "@@체크"));
+        });
+      };
+
+      loadItems()
+        .then((items) => {
+          displayItems(items);
+          setEventListners();
+        })
+        .catch(console.log);
     </script>
   </body>
 </html>
