@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ES-6</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>ES-6(2015)</h2>
+      <ol style="font-size: 20px">
+        <li>Shorthand property names</li>
+        <li>Destructuring assignment</li>
+        <li>Spread syntax</li>
+        <li>Default parameters</li>
+        <li>Ternary Operator</li>
+        <li>Template Literals</li>
+      </ol>
+      <h2>ES-11(2020)</h2>
+      <ol style="font-size: 20px">
+        <li>Optional chaining</li>
+        <li>Logical OR operator & Nullish coalescing operator</li>
+      </ol>
+    </div>
+
+    <script>
+      /**
+       * Shorthand property names
+       * https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Object_initializer
+       */
+      {
+        const person1 = {
+          name: "Jasper",
+          age: "35",
+        };
+
+        const name = "Jasper";
+        const age = "35";
+
+        // ❌ 좋지 않은 예
+        const person2 = {
+          name: name,
+          age: age,
+        };
+
+        // ⭕ 좋은 예, key와 value가 동일한 이름의 경우 1가지만 기재해도 된다.
+        const person3 = {
+          name,
+          age,
+        };
+      }
+
+      /**
+       * Destructuring Assignment
+       * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+       */
+      {
+        // object
+        const student = {
+          name: "Mike",
+          level: 1,
+          address: "Seoul",
+          age: "27",
+        };
+
+        // ❌ 좋지 않은 예
+        {
+          const name = student.name;
+          const level = student.level;
+          console.log(name, level);
+        }
+
+        // ⭕ 좋은 예, 오브젝트의 원하는 키만 {}안에서 변수로 선언하여 간결하게 사용할 수 있다.
+        {
+          const { name, level } = student;
+          console.log(name, level);
+
+          const { address } = student;
+          console.log(address);
+
+          // 원하는 키를 다른 이름으로도 선언하여 가져올 수 있다.
+          const { address: studentAddress } = student;
+          console.log(studentAddress);
+        }
+
+        // array
+        const fruits = ["🍎", "🍑"];
+
+        // ❌ 좋지 않은 예
+        {
+          const apple = fruits[0];
+          const peach = fruits[1];
+          console.log(apple, peach);
+        }
+
+        // ⭕ 좋은 예, 배열의 index순서대로 이름을 선언하여 변수에 담으면 된다.
+        {
+          const [apple, peach] = fruits;
+          console.log(apple, peach);
+        }
+      }
+
+      /**
+       * Spread Syntax
+       * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+       */
+      {
+        const obj1 = { key: "key1" };
+        const obj2 = { key: "key2" };
+        const array = [obj1, obj2];
+        console.log(array);
+
+        // array copy
+        const copiedArray1 = [...array];
+        console.log(copiedArray1);
+
+        // 새로운 값을 추가할 경우
+        const copiedArray2 = [...array, { key: "key3" }];
+        console.log(copiedArray2);
+
+        // ❗ 주의, Spread Syntax의 경우 요소 하나하나를 복사하는 것이 아니라 object의 주소를 복사해오기 때문에 복사되는 원본의 key나 value가 변경 될 경우 Spread Syntax로 복사 된 object나 array도 영향을 받는다. 따라서 원본의 key나 value를 손상시키지 않고 변경하고 싶을 경우 복사 된 object나 array에서 변경하면 된다.
+        obj1.key = "newKey1";
+
+        // object copy
+        const obj3 = { ...obj1 };
+        console.log(obj3);
+
+        // array concatenation
+        const fruits1 = ["🍎", "🍉"];
+        const fruits2 = ["🍐", "🍌"];
+        const totalFruits = [...fruits1, ...fruits2];
+
+        // object mergy
+        const flower1 = { sunFlower: "🌻" };
+        const flower2 = { dandelion: "🌼" };
+        const totalFlower = { ...flower1, ...flower2 };
+        console.log(totalFlower);
+
+        // ❗ 주의, 만일 key가 동일한 object를 복사하는 경우에는 첫번째 object의 키의 값에 뒤에오는 object의 키의 값이 덮어씌워진다.
+        const test1 = { key1: "key1", name: "name1" };
+        const test2 = { key2: "key2", name: "name2" };
+        const totalTest = { ...test1, ...test2 };
+        console.log(totalTest);
+      }
+
+      /**
+       * Default parameters
+       * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
+       */
+      {
+        // ❌ 좋지 않은 예
+        {
+          const printMessage = (message) => {
+            if (message == null) {
+              message = "default message";
+            }
+            console.log(message);
+          };
+          printMessage("Hello"); // "Hello" 출력
+          printMessage(); // if문의 "default message" 출력
+        }
+
+        // ⭕ 좋은 예, Default parameters를 활용하여 if문을 생략할 수 있다.
+        {
+          const printMessage = (message = "Hello") => {
+            console.log(message);
+          };
+          printMessage();
+        }
+      }
+
+      /**
+       * Ternary Operator
+       * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
+       */
+      {
+        const isCat = true;
+
+        // ❌ 좋지 않은 예
+        {
+          let component;
+          if (isCat) {
+            component = "😺";
+          } else {
+            component = "🐶";
+          }
+          console.log(component);
+        }
+
+        // ⭕ 좋은 예
+        {
+          const component = isCat ? "😺" : "🐶";
+          console.log(component);
+        }
+      }
+
+      /**
+       * Template Literals
+       * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+       */
+      {
+        const weather = "🌞";
+        const temparature = "27°C";
+
+        // ❌ 좋지 않은 예
+        console.log(
+          "Today weather is " +
+            weather +
+            " and " +
+            "temparature is " +
+            temparature,
+        );
+
+        // ⭕ 좋은 예
+        console.log(
+          `Today weather is ${weather} and temparature is ${temparature}`,
+        );
+      }
+
+      /**
+       * Optional Chaining
+       * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+       */
+      {
+        const person1 = {
+          name: "Jasper",
+          job: {
+            title: "S/W Engineer",
+            manager: {
+              name: "Bob",
+            },
+          },
+        };
+
+        const person2 = {
+          name: "Bob",
+        };
+
+        // ❌ 좋지 않은 예
+        {
+          const printManager = (person) => {
+            console.log(person.job.manager.name);
+          };
+          printManager(person1);
+          // printManager(person2); // manager이 존재하지 않기에 error발생
+        }
+
+        // ❌ 좋지 않은 예
+        {
+          const printManager = (person) => {
+            console.log(
+              person.job
+                ? person.job.manager
+                  ? person.job.manager.name
+                  : undefined
+                : undefined,
+            );
+          };
+          printManager(person1);
+          printManager(person2);
+        }
+
+        // ⭕ 좋은 예
+        {
+          const printManager = (person) => {
+            console.log(person.job?.manager?.name);
+          };
+          printManager(person1);
+          printManager(person2);
+        }
+      }
+
+      /**
+       * Logical OR Operator & Nullish Coalescing Operator
+       * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator
+       */
+      {
+        // Logical OR Operator
+        {
+          // 조건 = null, undefined, false, NaN, 0, -0, "", '', `` (-0을 제외한 음수의 경우는 조건에 부합하지 않는다.)
+          const name = "";
+          const userName = name || "Guest";
+          console.log(userName);
+        }
+
+        // Nullish Coalescing Operator
+        {
+          // 조건 = null, undefined
+          const name = "";
+          const userName = name ?? "Guest";
+          console.log(userName);
+        }
+      }
+    </script>
+  </body>
+</html>
