@@ -7,18 +7,26 @@
     <title>Document</title>
     <style>
       .container {
-        max-width: 300px;
-        margin: 5px auto;
+        max-width: 250px;
+        margin: 50px auto;
+        padding: 5px;
       }
       .btn-box {
+        display: flex;
+        justify-content: space-evenly;
+        margin: 5px 0;
         text-align: center;
       }
+      .btn-box button {
+        width: 15%;
+        padding: 5px;
+      }
       ul {
-        margin: 50px;
+        margin: 20px;
         padding: 0;
       }
       li {
-        margin: 5px;
+        margin: 10px 0;
         padding: 5px;
         border: 1px solid #000;
         text-align: center;
@@ -29,14 +37,14 @@
   <body>
     <div class="container">
       <div class="btn-box btn-box1">
-        <button id="top">Top</button>
-        <button id="up">Up</button>
-        <button id="bottom">Bottom</button>
-        <button id="down">Down</button>
+        <button id="top">↟</button>
+        <button id="up">↑</button>
+        <button id="bottom">↡</button>
+        <button id="down">↓</button>
       </div>
       <ul id="ul"></ul>
       <div class="btn-box btn-box2">
-        <button id="selectedBtn">check Selected</button>
+        <button id="examineBtn">✔</button>
       </div>
     </div>
 
@@ -62,23 +70,29 @@
         ul.innerHTML = items.map((item) => createHTMLString(item)).join(" ");
       };
 
+      const examineSelected = (items) => {
+        items.forEach((item, index) => {
+          console.log(item.selected, index);
+        });
+        console.log(" - - - - - - - - -");
+      };
+
+      const changeValues = (item) => {
+        item.style.backgroundColor =
+          item.style.backgroundColor === "white" ? "lightblue" : "white";
+        item.selected = item.selected === "N" ? "Y" : "N";
+      };
+
       const setEventListners = () => {
         const li = document.querySelectorAll(".li");
         li.forEach((item) => {
           item.selected = item.selected || "N";
-          console.log(item.selected, "@@셀렉티드");
+          item.style.backgroundColor = "white";
+          item.addEventListener("click", () => changeValues(item));
         });
 
-        li.forEach((item) => {
-          item.addEventListener("click", () => {
-            console.log(item.selected);
-          });
-        });
-
-        const handleSelectedBtn = document.querySelector("#selectedBtn");
-        handleSelectedBtn.addEventListener("click", () => {
-          li.forEach((item) => console.log(item.selected, "@@체크"));
-        });
+        const examineBtn = document.querySelector("#examineBtn");
+        examineBtn.addEventListener("click", () => examineSelected(li));
       };
 
       loadItems()
