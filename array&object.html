@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="h1"></h1>
+
+    <script>
+      const personList = [
+        {
+          name: "톰크루즈",
+          age: "53",
+          nationality: "미국",
+          achievement: "탑건",
+        },
+        { name: "김정은", age: "60", nationality: "북한", achievement: "짤" },
+        {
+          name: "간디",
+          age: "55",
+          nationality: "인도",
+          achievement: "물레방아",
+        },
+        {
+          name: "달심",
+          age: "20",
+          nationality: "인도",
+          achievement: "팔다리 늘어남",
+        },
+        {
+          name: "블랑카",
+          age: "35",
+          nationality: "브라질",
+          achievement: "피카츄",
+        },
+      ];
+
+      const selectedPerson = [
+        { name: "간디", address: "서울", hobby: "물레방아" },
+      ];
+
+      const ul = document.querySelector("#ul");
+
+      const onPrintPersonName = () => {
+        const li = document.createElement("li");
+        const findName = selectedPerson.map((item) => item.name);
+        // console.log(findName.join(""));
+
+        personList.filter((item) => {
+          const a = Array.from(item.name).join("");
+          // console.log(a, "@");
+          for (let index = 0; index < personList.length; index++) {
+            if (findName.join("") === a) {
+              console.log(item.name, "@@for문 안");
+              const h1 = document.querySelector("h1");
+              const h2 = document.createElement("h2");
+              h1.prepend(h2);
+              h2.innerText = item.name;
+              break;
+            }
+          }
+          // console.log(item.name, "##for문 밖");
+        });
+      };
+      onPrintPersonName();
+    </script>
+  </body>
+</html>
