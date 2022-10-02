@@ -83,6 +83,17 @@
         item.selected = item.selected === "N" ? "Y" : "N";
       };
 
+      const moveTop = (li) => {
+        const selectedItems = [];
+        const unSelectedItems = [];
+        li.forEach((item) => {
+          if (item.selected === "Y") {
+            selectedItems.push(item);
+          }
+        });
+        console.log(selectedItems);
+      };
+
       const setEventListners = () => {
         const li = document.querySelectorAll(".li");
         li.forEach((item) => {
@@ -93,6 +104,9 @@
 
         const examineBtn = document.querySelector("#examineBtn");
         examineBtn.addEventListener("click", () => examineSelected(li));
+
+        const topBtn = document.querySelector("#top");
+        topBtn.addEventListener("click", () => moveTop(li));
       };
 
       loadItems()
