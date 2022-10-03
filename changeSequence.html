@@ -24,33 +24,48 @@
     console.log(array, "전");
 
     button.addEventListener("click", () => {
-      //   for (let i=0; i < this.array.length; i++) {
+      // for (let i = 0; i < this.array.length; i++) {
       //   if (i === 0) {
-      //     if (this.array[i].selected === 'Y') {
-      //       let temp = this.array[i]
-      //       this.array.splice(i, 1)
-      //       this.array.splice(i + 1, 0, temp)
-      //       this.array[i + 1].isMoved = true
+      //     if (this.array[i].selected === "Y") {
+      //       let temp = this.array[i];
+      //       this.array.splice(i, 1);
+      //       this.array.splice(i + 1, 0, temp);
+      //       this.array[i + 1].isMoved = true;
       //     } else {
-      //       }
+      //     }
       //   } else if (i === this.array.length - 1) {
       //   } else {
-      //     if (this.array[i].selected === 'Y' && !this.array[i].isMoved) {
-      //       let temp = this.array[i]
-      //       this.array.splice(i, 1)
-      //       this.array.splice(i + 1, 0, temp)
-      //       this.array[i + 1].isMoved = true
+      //     if (this.array[i].selected === "Y" && !this.array[i].isMoved) {
+      //       let temp = this.array[i];
+      //       this.array.splice(i, 1);
+      //       this.array.splice(i + 1, 0, temp);
+      //       this.array[i + 1].isMoved = true;
       //     } else {
       //     }
       //   }
       // }
 
       for (let i = 0; i < array.length; i++) {
-        if (array[i].selected === "Y") {
-          array[i].order = array[i].order ?? i + 1;
-          array.splice(i, 1);
-          array.splice(i + 1, 0, array[i]);
+        array[i].isMoved = array[i].isMoved ?? false;
+        if (i === 0) {
+          if (array[i].selected === "Y") {
+            let selectedItem = array[i];
+            array.splice(i, 1);
+            array.splice(i + 1, 0, selectedItem);
+            array[i + 1].isMoved = true;
+          }
         }
+        // else if (i === array.length - 1) {
+        // }
+        else {
+          if (array[i].selected === "Y" && !array[i].isMoved) {
+            let selectedItem = array[i];
+            array.splice(i, 1);
+            array.splice(i + 1, 0, selectedItem);
+            array[i + 1].isMoved = true;
+          }
+        }
+        array[i].isMoved = array[i].isMoved ?? false;
       }
 
       console.log(array, "후");
