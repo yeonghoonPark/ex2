@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>changeSequence</title>
+  </head>
+  <body>
+    <button>click</button>
+  </body>
+  <script>
+    const array = [
+      { value: "1", selected: "Y" },
+      { value: "2", selected: "" },
+      { value: "3", selected: "Y" },
+      { value: "4", selected: "" },
+      { value: "5", selected: "" },
+      { value: "6", selected: "" },
+    ];
+
+    const button = document.querySelector("button");
+
+    console.log(array, "전");
+
+    button.addEventListener("click", () => {
+      //   for (let i=0; i < this.array.length; i++) {
+      //   if (i === 0) {
+      //     if (this.array[i].selected === 'Y') {
+      //       let temp = this.array[i]
+      //       this.array.splice(i, 1)
+      //       this.array.splice(i + 1, 0, temp)
+      //       this.array[i + 1].isMoved = true
+      //     } else {
+      //       }
+      //   } else if (i === this.array.length - 1) {
+      //   } else {
+      //     if (this.array[i].selected === 'Y' && !this.array[i].isMoved) {
+      //       let temp = this.array[i]
+      //       this.array.splice(i, 1)
+      //       this.array.splice(i + 1, 0, temp)
+      //       this.array[i + 1].isMoved = true
+      //     } else {
+      //     }
+      //   }
+      // }
+
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].selected === "Y") {
+          array[i].order = array[i].order ?? i + 1;
+          array.splice(i, 1);
+          array.splice(i + 1, 0, array[i]);
+        }
+      }
+
+      console.log(array, "후");
+    });
+    /**
+     * 2
+     * 1
+     * 4
+     * 3
+     * 5
+     * 6
+     */
+  </script>
+</html>
