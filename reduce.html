@@ -130,6 +130,15 @@
       console.log(allBooks, "allBooks");
 
       // 배열의 중복 항목 제거
+      const arr7 = [1, 2, 1, 2, 3, 5, 4, 5, 3, 4, 4, 4, 4];
+      const result7 = arr7.sort().reduce((accumulator, currentValue) => {
+        const length = accumulator.length;
+        if (length === 0 || accumulator[length - 1] !== currentValue) {
+          accumulator.push(currentValue);
+        }
+        return accumulator;
+      }, []);
+      console.log(result7, "result7");
     </script>
   </body>
 </html>
