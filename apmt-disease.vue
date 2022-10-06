@@ -1190,34 +1190,13 @@ const testFunction2 = async () => {
   modalCopyMiddleList.value.forEach((item) => {
     item.checkSelected === 'Y' ? testMiddle.value.push(item) : null;
   });
-  // modalCopySelectedMainListRow.value.prst_uniq_no =
-  //   await createPrstUniqNoWithApi();
-  // // checkSelected === 'Y' = push
-  // modalCopyMiddleList.value.forEach(async (item) => {
-  //   // if (item.checkSelected === 'Y') {
-  //   //   testMiddle.value.push(item);
-  //   // }
-  //   item.checkSelected === 'Y' ? testMiddle.value.push(item) : null;
-  //   // let old_id = item.prst_uniq_no;
-  //   // let new_id = await createPrstUniqNoWithApi();
-  //   // item.prst_uniq_no = new_id;
-  //   // testMiddle.forEach(i => i.prst_uniq_no == old_id ? i.prst_uniq_no = ne);
-  //   if (modalCopySelectedMainListRow.value) {
-  //     item.uprn_prst_uniq_no = modalCopySelectedMainListRow.value.prst_uniq_no;
-  //   }
-  //   // console.log(testMiddle.value, '@@테스트미들');
-  //   // console.log(testMiddle.value, '@@@미들1');
-  // });
-  // // checkSelected === 'N' = delete
-  // testMiddle.value.filter((item, index) => {
-  //   if (item.checkSelected === 'N') {
-  //     testMiddle.value.splice(index, 1);
-  //   }
-  // });
-  // // 배열안에 객체가 동일한 값이 존재하는데 Set함수가 작동하지 않는 문제.
-  // // 원인, JavaScript에서 동일한 키와, 동일한 밸류를 가지는 두 객체는 동일하지 않다.
-  // // const setMiddle = new Set(testMiddle.value);
-  // // testMiddle.value = [...setMiddle];
+
+  testMiddle.value.filter((item, index) => {
+    if (item.checkSelected === 'N') {
+      testMiddle.value.splice(index, 1);
+    }
+  });
+
   const removeOverlapMiddle = testMiddle.value.filter((item1, index) => {
     return (
       testMiddle.value.findIndex((item2) => {
@@ -1226,40 +1205,27 @@ const testFunction2 = async () => {
     );
   });
   testMiddle.value = removeOverlapMiddle;
-  // console.log(testMiddle.value, '@@@미들2');
 };
 
 const testFunction3 = async () => {
-  // // set prst
-  // modalCopySelectedMainListRow.value.prst_uniq_no =
-  //   await createPrstUniqNoWithApi();
-  // // modalCopyDetailList Logic
-  // modalCopyDetailList.value.forEach((item) => {
-  //   if (modalCopySelectedMiddleListRow.value) {
-  //     item.prst_uniq_no = modalCopySelectedMiddleListRow.value.prst_uniq_no;
-  //     console.log('미들pr받음');
-  //   } else if (
-  //     modalCopySelectedMainListRow.value &&
-  //     !modalCopySelectedMiddleListRow.value
-  //   ) {
-  //     item.prst_uniq_no = modalCopySelectedMainListRow.value.prst_uniq_no;
-  //     console.log('메인pr받음');
-  //   }
-  //   // item.prst_uniq_no = modalCopySelectedMiddleListRow.value.prst_uniq_no;
-  //   item.checkSelected === 'Y' ? testDetail.value.push(item) : null;
-  // });
-  // testDetail.value.filter((item, index) => {
-  //   item.checkSelected === 'N' ? testDetail.value.splice(index, 1) : null;
-  // });
-  // const removeOverlapDetail = testDetail.value.filter((item1, index) => {
-  //   return (
-  //     testDetail.value.findIndex((item2) => {
-  //       return item1.ilns_nm === item2.ilns_nm;
-  //     }) === index
-  //   );
-  // });
-  // testDetail.value = removeOverlapDetail;
-  // console.log(testDetail.value, '###디테일');
+  modalCopyDetailList.value.forEach((item) => {
+    item.checkSelected === 'Y' ? testDetail.value.push(item) : null;
+  });
+
+  testDetail.value.filter((item, index) => {
+    if (item.checkSelected === 'N') {
+      testDetail.value.splice(index, 1);
+    }
+  });
+
+  const removeOverlapDetail = testDetail.value.filter((item1, index) => {
+    return (
+      testDetail.value.findIndex((item2) => {
+        return item1.ilns_nm === item2.ilns_nm;
+      }) === index
+    );
+  });
+  testDetail.value = removeOverlapDetail;
 };
 
 // ModalCopy 선택Btn Event
@@ -1269,32 +1235,89 @@ const handleModalCopyChoiceBtn = async () => {
       item.checkSelected === 'Y' ? testMain.value.push(item) : null;
     });
 
-    testMain.value.forEach(async (item) => {
-      let old_prst_uniq_no = item.prst_uniq_no;
-      let new_prst_uniq_no = await createPrstUniqNoWithApi();
-      item.prst_uniq_no = new_prst_uniq_no;
+    let old_main_prst_arr = [];
+    let new_main_prst_arr = [];
+    let newTestMain = await Promise.all(
+      testMain.value.map(async (item) => {
+        let old_main_prst_uniq_no = item.prst_uniq_no;
+        let new_main_prst_uniq_no = await createPrstUniqNoWithApi();
+        item.prst_uniq_no = new_main_prst_uniq_no;
+        item.action = 'POST';
+        old_main_prst_arr.push(old_main_prst_uniq_no);
+        new_main_prst_arr.push(new_main_prst_uniq_no);
+        // console.log(old_prst_uniq_no, '@올드메인prst');
+        // console.log(new_prst_uniq_no, '@뉴메인psrst');
+        return item;
+      }),
+    );
+    console.log(old_main_prst_arr, '@올드메인prst');
+    console.log(new_main_prst_arr, '@뉴메인prst');
+    console.log(newTestMain, '!테스트메인');
+    mainList.value = [...mainList.value, ...newTestMain];
+
+    let old_middle_uprn_prst_arr = [];
+    let new_middle_prst_arr = [];
+    let newTestMiddle = await Promise.all(
+      testMiddle.value.map(async (item) => {
+        let old_middle_uprn_prst_uniq_no = item.uprn_prst_uniq_no;
+        let new_middle_prst_uniq_no = await createPrstUniqNoWithApi();
+        item.prst_uniq_no = new_middle_prst_uniq_no;
+        item.action = 'POST';
+        old_middle_uprn_prst_arr.push(old_middle_uprn_prst_uniq_no);
+        new_middle_prst_arr.push(new_middle_prst_uniq_no);
+        // console.log(old_uprn_prst_uniq_no, '@올드미들uprn');
+        // console.log(new_prst_uniq_no, '@뉴미들prst');
+
+        // [1, 2, 3] old_main_prst_arr
+        // [2, 1, 2, 3] old_middle_uprn_prst_arr
+        // [3, 4, 5] new_main_prst_arr
+        for (let i = 0; i < old_main_prst_arr.length; i++) {
+          for (let cnt = 0; cnt < old_middle_uprn_prst_arr.length; cnt++) {
+            if (old_main_prst_arr[i] === old_middle_uprn_prst_arr[cnt]) {
+              old_middle_uprn_prst_arr[cnt] = new_main_prst_arr[i];
+              item.uprn_prst_uniq_no = new_main_prst_arr[i];
+            }
+          }
+        }
+        return item;
+      }),
+    );
+    // console.log(old_middle_uprn_prst_arr, '@올드미들uprn배열');
+    // console.log(new_middle_prst_arr, '@뉴pr배열');
+    console.log(newTestMiddle, '@테스트미들');
+    // newTestMiddle.forEach((item) =>
+    //   console.log(item.uprn_prst_uniq_no, '#뉴uprn'),
+    // );
+    middleList.value = [...middleList.value, ...newTestMiddle];
+
+    let old_detail_prst_arr = [];
+    const newTestDetail = testDetail.value.map((item) => {
+      let old_detail_prst_uniq_no = item.prst_uniq_no;
       item.action = 'POST';
-      console.log(old_prst_uniq_no, '@올드');
-      // console.log(new_prst_uniq_no, '@뉴');
+
+      old_detail_prst_arr.push(old_detail_prst_uniq_no);
+
+      // main => detail
+      // [1, 2] old_main_prst_arr
+      // [1 ,2 ,1 ,2, 2] old_detail_prst_arr
+      // [3, 4] new_main_prst_arr
+      for (let i = 0; i < old_main_prst_arr.length; i++) {
+        for (let cnt = 0; cnt < old_detail_prst_arr.length; cnt++) {
+          if (old_main_prst_arr[i] === old_detail_prst_arr[cnt]) {
+            old_detail_prst_arr[cnt] = new_main_prst_arr[i];
+            item.prst_uniq_no = new_main_prst_arr[i];
+          }
+        }
+      }
+
+      return item;
     });
-    console.log(testMain.value, '!테스트메인');
-    mainList.value = [...mainList.value, ...testMain.value];
+    console.log(old_detail_prst_arr, '@올드디테일prst');
+    console.log(newTestDetail, '#테스트디테일');
 
-    console.log(testMiddle.value, '@테스트미들');
+    detailList.value = [...detailList.value, ...newTestDetail];
 
-    testMiddle.value.forEach(async (item) => {
-      item.uprn_prst_uniq_no = testMain.value[0].prst_uniq_no;
-      item.prst_uniq_no = await createPrstUniqNoWithApi();
-      item.action = item.action ?? 'POST';
-    });
-    middleList.value = [...middleList.value, ...testMiddle.value];
-
-    // testDetail.value.forEach((item) => {
-    //   item.action = item.action ?? 'POST';
-    // });
-    // detailList.value = [...detailList.value, ...testDetail.value];
-
-    await saveAllListsWithApiApi();
+    // await saveAllListsWithApiApi();
     closeModalCopy();
   };
   store.dispatch('loading', loadFunc);
@@ -1706,20 +1729,21 @@ const saveDetailListWithApi = async () => {
   const loadFunc = async () => {
     try {
       detailList.value.map(async (item, index) => {
-        // if (modalCopySelectedMiddleListRow.value) {
-        // item.prst_uniq_no = modalCopySelectedMiddleListRow.value.prst_uniq_no;
-        // } else if (
-        // modalCopySelectedMainListRow.value &&
-        // !modalCopySelectedMiddleListRow.value
-        // ) {
-        // item.prst_uniq_no = modalCopySelectedMainListRow.value.prst_uniq_no;
-        // } else
-        if (item.action === 'POST' && !modalCopySelectedMainListRow.value) {
-          item.prst_uniq_no = selectedMainListRow.value.prst_uniq_no;
-        } else if (selectedMainListRow.value && !selectedMiddleListRow.value) {
-          item.prst_uniq_no = selectedMainListRow.value.prst_uniq_no;
-        } else if (selectedMainListRow.value && selectedMiddleListRow.value) {
-          item.prst_uniq_no = selectedMiddleListRow.value.prst_uniq_no;
+        /* 임시주석 */
+        // if (item.action === 'POST' && !modalCopySelectedMainListRow.value) {
+        //   item.prst_uniq_no = selectedMainListRow.value?.prst_uniq_no;
+        // } else if (selectedMainListRow.value && !selectedMiddleListRow.value) {
+        //   item.prst_uniq_no = selectedMainListRow.value.prst_uniq_no;
+        // } else if (selectedMainListRow.value && selectedMiddleListRow.value) {
+        //   item.prst_uniq_no = selectedMiddleListRow.value.prst_uniq_no;
+        // }
+
+        if (item.action === 'POST') {
+          if (selectedMainListRow.value) {
+            item.prst_uniq_no = selectedMainListRow.value?.prst_uniq_no;
+          } else if (item.action === 'POST' && selectedMiddleListRow.value) {
+            item.prst_uniq_no = selectedMiddleListRow.value.prst_uniq_no;
+          }
         }
 
         item.top_mid_dtl_type = 'D';
