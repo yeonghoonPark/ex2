@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      /**
+       * Map객체
+       * 간단한 key와 value를 서로 연결(맵핑)시켜 저장하며 저장 된 순으로 각 요소들을 반복적으로 접근할 수 있도록 한다.
+       * https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Keyed_collections
+       */
+
+      // Map객체에 저장되어 있는 각 요소들을 [key, value] 형태의 배열로 반복적으로 반환해주는 for...of 를 사용 할 수 있다.
+      const objMap = new Map();
+
+      // set을 이용한 key와 value 설정, Object와 다르게 key에 String type 뿐만 아니라 모든 type이 올 수 있다.
+      objMap.set("name", "홍만초이");
+      objMap.set(45, "age");
+      objMap.set("job", "fighter");
+      console.log(objMap, "objMap");
+
+      // set을 대신하여 2차원 배열로 넘겨 줄 수 있다.
+      const testObjMap = new Map([
+        ["id", 20221007],
+        ["name", "홍길동"],
+        ["job", "도둑"],
+      ]);
+      console.log(testObjMap, "testObjMap");
+
+      // size를 이용하여 길이를 쉽게 구할 수 있다.
+      const objMapLength = objMap.size;
+      console.log(objMapLength, "objMapLength");
+
+      // get()으로 key에 접근하여 value를 구할 수 있다.
+      const age = objMap.get(45);
+      console.log(age, 45);
+
+      // get()으로 key에 접근했지만 key가 없는 경우에는 undefined 이다.
+      const address = objMap.get("address");
+      console.log(address, "address");
+
+      // has()로 key에 접근 할 경우 boolean타입으로 반환한다. (key가 존재할 경우 true, 존재하지 않을 경우 false)
+      const objMapBoolean = objMap.has("job");
+      console.log(objMapBoolean, "objMapBoolean");
+
+      // for...of를 이용한 반복문
+      for (let [key, value] of objMap) {
+        console.log(`${key}은(는) ${value}`);
+      }
+
+      // delete()로 key에 접근하여 해당 key와 value를 삭제 할 수 있다.
+      objMap.delete("job");
+      console.log(objMap, "delete()로 해당 key와 value 삭제");
+
+      // clear()로 Map의 전체 key와 value를 삭제 할 수 있다.
+      objMap.clear();
+      console.log(objMap, "clear()로 모든 삭제");
+
+      /**
+       * Map과 Object 비교
+       * 1. Object의 key는 'String' 또는 'Symbol' 이지만 Map는 모든 값을 가질 수 있다.
+       * 2. Object는 길이를 수동으로 추적해야하지만 Map는 size를 이용하여 쉽게 얻을 수 있다.
+       * 3. Map는 삽입 된 순서대로 반복된다.
+       * 4. Object에는 prototype이 있어 Map에 기본 키들이 있다.? (map = Object.create(null)을 이용하여 우회할 수 있다.)
+       *
+       * 💡. Map을 사용하는 경우
+       * 실행이 되기 전까지 키를 알 수 없고, 모든 키가 동일한 타입이며 모든 값들이 동일한 type일 경우에는 Map을 사용하는게 좋다.
+       *
+       * 💡. Object 사용하는 경우
+       * 각 개별 요소에 대해 적용해야 하는 로직이 있을 경우에는 Object가 좋다.
+       */
+
+      // key값으로 'String' type이 아닌 다른 type을 쓰는 예
+      const errorMessageMap = new Map([
+        [404, "찾으시는 페이지가 없습니다."],
+        [500, "서버 오류입니다."],
+        [401, "권한이 없습니다."],
+      ]);
+      const testError = errorMessageMap.get(404);
+      console.log(testError);
+
+      /**
+       * 메소드 사용의 명확성
+       * Object에 접근하는 방식인 . 또는 [] 를 사용할 필요없이 메소드만으로 프로퍼티들을 수정하거나
+       * 조회할 수 있다.
+       * set, get, delete, clear, size 등등..
+       * 동작과 의도가 정확하게 전달 되는 장점을 지닌다.
+       */
+
+      // object: let으로 선언한 후 빈 object로 초기화하는 방식 (const는 불가능)
+      let testInfoObj = {
+        name: "Tom",
+        age: 30,
+        major: "English",
+      };
+      console.log(testInfoObj, "object 초기화 전");
+      testInfoObj = {};
+      console.log(testInfoObj, "object 초기화 후");
+
+      // Map object: clear()을 이용한 초기화 방식 (const 가능)
+      const testInfoMapObj = new Map([
+        ["name", "Alien"],
+        ["age", "?"],
+        ["major", "Korean"],
+      ]);
+      console.log(testInfoMapObj, "Map 초기화 전");
+      testInfoMapObj.clear();
+      console.log(testInfoMapObj, "Map 초기화 후");
+
+      // for...of 를 이용한 반복
+      const forOfMap = new Map([
+        ["a", 1],
+        ["b", 2],
+        ["c", 3],
+      ]);
+      for (const [key, value] of forOfMap) {
+        console.log(`키${key}와 밸류${value}`);
+      }
+
+      /**
+       * object는 for...in 또는 object.keys 를 사용하여 순회해왔다, 2가지의 순회 방법은
+       * 기본적으로 프로퍼티의 key만 순회하기 때문에 key를 이용하여 value를 다시 얻어야 한다,
+       * 이러한 불편함 때문에 Object.entries가 등장했다.
+       */
+
+      const testObj = {
+        name: "computer",
+        price: 1000000,
+      };
+
+      // for...in 이용
+      for (key in testObj) {
+        console.log(key, testObj[key], "for...in 이용");
+      }
+
+      // Object.keys 이용
+      for (key of Object.keys(testObj)) {
+        console.log(key, testObj[key], "for...of와 Object.keys() 이용");
+      }
+    </script>
+  </body>
+</html>
